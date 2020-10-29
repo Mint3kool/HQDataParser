@@ -155,3 +155,4 @@ echo "Minimum time: $min_time_secs"
 echo "Maximum time: $max_time_secs"
 echo "Maximum time id: $max_id"
 echo "${percentile_value%.*}th percentile time: $percentile_average"
+
