@@ -15,6 +15,9 @@
 # Example commands
 # ./script.sh <file_name> <start_timestamp> <end_timestamp>
 # ./script.sh <file_name> "2020-10-19 14:41:19.000" "2020-10-19 14:41:20.827"
+#
+# Expected input file format
+# 2020-10-19 14:41:19.827 [ABC] [https-james-info-3923-something-1] DEBUG d.perf - RequestData(id=d9278759-3f3e-47f0-bec4-357f4ea8df92, message=Message 2, ts=2020-10-19 14:41:19.664217)
 
 input_file=$1
 start_date=$2
@@ -148,7 +151,7 @@ echo "Records Processed: $count"
 avg_time_secs="$(echo "scale=6;($sum/$count)/1000" | bc -q)"
 min_time_secs="$(echo "scale=6;$min_time/1000" | bc -q)"
 max_time_secs="$(echo "scale=6;$max_time/1000" | bc -q)"
-percentile_average="$(echo "scale=6;($percentile_sum/$percentile_index)/1000" | bc -q)"
+percentile_average="$(echo "scale=6;($percentile_sum/$count)/1000" | bc -q)"
 
 echo "Average time: $avg_time_secs"
 echo "Minimum time: $min_time_secs"
