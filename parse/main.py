@@ -53,12 +53,15 @@ def main():
     average_time = results[:, 3].mean()
     min_time = results[:, 3].min()
     max_index, max_time = max(enumerate(results[:, 3]), key=operator.itemgetter(1))
+    num_under_sec = np.count_nonzero(results[:,3] < 1)
     inputfile = os.path.basename(inputpath)
     input_trimmed = os.path.splitext(inputfile)[0] + '.csv'
     output_path = "results/result_" + input_trimmed
     np.savetxt(output_path, results, fmt='%s, %s, %s, %.6s')
     sorted_diff_time = results[results[:, 3].argsort()]
     result_shape = sorted_diff_time.shape
+    records_processed = result_shape[0]
+    percent_under_min = (num_under_sec/records_processed) * 100
 
     time_percentile = 90
     index = round(result_shape[0] * time_percentile/100)
@@ -66,11 +69,12 @@ def main():
 
     print("Results")
     print("--------------------------------------")
-    print("Records Processed: " + str(result_shape[0]))
+    print("Records Processed: " + str(records_processed))
     system_end_time = time.time()
     system_time_diff = system_end_time - system_start_time
     print("Total Processing Time: " + str(system_time_diff))
     print("Average Time: " + str(average_time))
+    print("% Records <1s: " + str(round(percent_under_min, 2)) + "%")
     print("Minimum Time: " + str(min_time))
     print("Maximum Time: " + str(max_time))
     print("Maximum Time Index: " + results[max_index][2]) 
