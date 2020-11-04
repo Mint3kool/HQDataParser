@@ -1,4 +1,4 @@
-#Description
+# Description
 This script is used for finding differences in timestamps after logs have moved through a target system.
 
 ## Running the Script
