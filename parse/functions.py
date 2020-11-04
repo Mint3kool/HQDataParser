@@ -23,8 +23,12 @@ class RowProcessor(object):
         self.__end_timestamp = datetime.strptime(inputtime, "%Y-%m-%d %H:%M:%S.%f")
 
     def time_diff(self, early, late):
-        earlyTime = datetime.strptime(early, "%Y-%m-%d %H:%M:%S.%f")
-        lateTime = datetime.strptime(late, "%Y-%m-%d %H:%M:%S.%f")
+        earlyTime = datetime.strptime(early.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3], "%Y-%m-%d %H:%M:%S.%f")
+        lateTime = datetime.strptime(late.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3], "%Y-%m-%d %H:%M:%S.%f")
+
+        print(earlyTime)#.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3])
+        print(lateTime)#.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3])
+
         dateTimeDelta = lateTime - earlyTime
         seconds = dateTimeDelta.seconds;
         microseconds = dateTimeDelta.microseconds;
