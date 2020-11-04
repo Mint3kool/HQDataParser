@@ -4,7 +4,7 @@ This script is used for finding differences in timestamps after logs have moved 
 ## Running the Script
 1. From the top level directory, run
 ```
-python parse/main.py results/<inputfile> <start_ts> <end_ts>
+python parse/main.py <inputfile_path> <start_ts> <end_ts>
 ```
 2. Example input
 ```
